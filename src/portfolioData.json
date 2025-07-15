@@ -1,0 +1,80 @@
+{
+  "summary": "I’m a hands-on Full-Stack Web Developer experienced in building clean, functional web apps with tools like Django and modern front-end tech. I’ve worked on real projects, many internships and participated in hackathons, always focused on solving problems and learning new skills.",
+  "skills": [
+    "MERN", "Django", "SQL", "AI & ML", "Flask"
+  ],
+  "softSkills": [
+    "Problem-Solving & Critical Thinking", "Team Collaboration & Leadership", "Adaptability & Self-Learning"
+  ],
+  "technicalSkills": [
+    "Python", "C/C++", "Java", "HTML/CSS/JS"
+  ],
+  "workExperience": [
+    {
+      "role": "Full-Stack Web Developer Intern",
+      "company": "Altrusity",
+      "date": "Jan 2025 - Mar 2025",
+      "details": [
+        "Developed and maintained web applications using the Django stack, ensuring scalability and performance.",
+        "Collaborated with the team to improve UI/UX, enhancing user engagement and experience.",
+        "Optimized database queries, improving backend efficiency and response times."
+      ]
+    },
+    {
+      "role": "Data Science Trainee",
+      "company": "Main Flow Services and Technologies Pvt. Ltd.",
+      "date": "Jan 2025 - Mar 2025",
+      "details": [
+        "Completed hands-on training in Data Science with Python, learning statistical analysis and machine learning concepts.",
+        "Worked on real-world datasets, applying data visualization and predictive modeling techniques.",
+        "Gained experience with tools like Pandas, NumPy, and Matplotlib for data analysis."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Mobile POS Billing System",
+      "tech": ["Flutter", "Flask", "Firebase"],
+      "description": "Developed features like billing system for efficient transactions, inventory management for real-time stock tracking, and market analysis to provide sales insights. Integrated AI-based price prediction and frequently purchased product analytics, along with employee dashboards for streamlined staff operations.",
+      "role": "Integrated AI-based price prediction and frequently purchased product analytics, along with employee dashboards for streamlined staff operations."
+    },
+    {
+      "name": "Road Safe AI – Smart Navigation for Chennai Community",
+      "tech": ["AI", "Mapping APIs", "Real-time Data Processing"],
+      "description": "Developed an AI-powered navigation system to help Chennai residents travel safely. Identifies accident-prone areas and suggests alternative safe routes in real time. Integrated features for finding parking spots and locating nearby mechanic shops. Built using AI, mapping APIs, and real-time data processing for improved safety and convenience."
+    },
+    {
+      "name": "JobConnect Pro – AI-driven Recruitment System (hackathon winning project)",
+      "tech": ["AI", "ATS", "Resume Parsing"],
+      "description": "Developed an AI-powered platform for job seekers to upload resumes, receive match scores, and get ATS optimization suggestions. Enabled recruiters to post jobs with skill-based weightage and filter top candidates using AI insights. Integrated features like application tracking, real-time messaging, and result notifications for a seamless experience."
+    },
+    {
+      "name": "Rainfall Prediction (Paper Published)",
+      "tech": ["Python", "ML"],
+      "description": "Rainfall Prediction using machine learning, published in IJAEM."
+    }
+  ],
+  "education": [
+    {
+      "degree": "B.Tech (Hons) Information Technology",
+      "college": "Meenakshi Sundararajan Engineering College, Chennai, India",
+      "cgpa": "8.78 (as of 5th semester)",
+      "duration": "Nov 2022 - May 2026"
+    }
+  ],
+  "certifications": [
+    "Python for Data Science and Machine Learning Bootcamp - Udemy",
+    "The Complete Full-Stack Web Development Bootcamp",
+    "Programming in Java - NPTEL",
+    "React, NodeJS, Express & MongoDB - The MERN Fullstack Guide - Udemy",
+    "Intro To MongoDB - MongoDB",
+    "Intro To Cybersecurity - Cisco",
+    "Intro to Networks - Cisco"
+  ],
+  "contact": {
+    "email": "ajithr1707@gmail.com",
+    "phone": "8838263165",
+    "linkedin": "https://www.linkedin.com/in/ajith-raghavendra-106247290/",
+    "github": "https://github.com/ajx1707"
+  }
+} 
