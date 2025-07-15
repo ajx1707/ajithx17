@@ -701,6 +701,8 @@ html, body, #root {
     z-index: 100;
     transition: left 0.3s ease;
     box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+    padding-bottom: 80px; /* Add padding at bottom for social links */
+    overflow-y: auto;
   }
 
   .left-panel.open {
@@ -719,5 +721,31 @@ html, body, #root {
   /* Hide quick questions on mobile */
   .quick-questions {
     display: none;
+  }
+
+  /* Adjust social links positioning */
+  .social-section {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    padding: 20px 0;
+    margin-top: auto;
+    z-index: 101;
+  }
+
+  /* Ensure AI message icon is fully visible */
+  .ai-avatar {
+    margin-top: 8px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .message {
+    padding-top: 12px; /* Add more padding at top of messages */
+  }
+
+  /* Ensure the chat area doesn't overlap with the header */
+  .chat-area {
+    padding-top: 12px;
   }
 }
