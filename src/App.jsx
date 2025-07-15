@@ -3,7 +3,23 @@ import ReactMarkdown from "react-markdown";
 import portfolioData from "./portfolioData.json";
 import "./App.css";
 
-
+// Hamburger Menu Icon Component
+const HamburgerIcon = ({ onClick, isOpen }) => (
+  <button className="hamburger-menu" onClick={onClick} aria-label="Toggle menu">
+    <svg 
+      viewBox="0 0 24 24" 
+      width="24" 
+      height="24" 
+      stroke="currentColor" 
+      strokeWidth="2"
+      className={isOpen ? 'open' : ''}
+    >
+      <line x1="3" y1="6" x2="21" y2="6" />
+      <line x1="3" y1="12" x2="21" y2="12" />
+      <line x1="3" y1="18" x2="21" y2="18" />
+    </svg>
+  </button>
+);
 
 const optionsList = [
   "Summary", "Projects", "Skills", "Technical Skills", "Soft Skills", "Work Experience", "Education", "Certifications", "Contact"
@@ -127,7 +143,25 @@ function App() {
   const [streamedText, setStreamedText] = useState("");
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [theme, setTheme] = useState("dark");
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const messagesEndRef = useRef(null);
+
+  // Toggle mobile menu
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  // Close mobile menu when window is resized to desktop size
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Quick questions data
   const quickQuestions = [
@@ -358,11 +392,10 @@ Always stay focused on Ajith's portfolio and professional background.`;
   return (
     <>
       <header className="main-header">
+        <HamburgerIcon onClick={toggleMobileMenu} isOpen={isMobileMenuOpen} />
         <div className="header-logo">
-          <a href="/" className="monogram" title="Ajith R's Portfolio">
-            AJ
-          </a>
-          <div className="header-title">Ajith R's Portfolio</div>
+          <a href="/" className="monogram">A</a>
+          <span className="header-title">Ajith R</span>
         </div>
         <button
           className="theme-toggle-btn"
@@ -394,12 +427,12 @@ Always stay focused on Ajith's portfolio and professional background.`;
         </button>
       </header>
       <div className="container">
-        <div className="left-panel">
+        <div className={`left-panel ${isMobileMenuOpen ? 'open' : ''}`}>
           <div className="profile-container">
             <div className="profile-glow">
               <img
                 className="profile-img"
-                src="/IMG_20250708_114543.jpg"
+                src="/ajithx17/IMG_20250708_114543.jpg"
                 alt="Ajith Kumar"
                 style={{ cursor: 'pointer' }}
                 onClick={() => setShowProfileModal(true)}
@@ -445,16 +478,53 @@ Always stay focused on Ajith's portfolio and professional background.`;
             </div>
           </div>
         </div>
-      <div className="right-panel">
-        <div className="chat-area">
-          <div className="messages">
-            {messages.map((msg, idx) => (
-              msg.role === "ai" ? (
-                <div
-                  key={idx}
-                  className="message-row ai-row"
-                  style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-start', marginBottom: '0.5em' }}
-                >
+        <div className="right-panel" onClick={() => isMobileMenuOpen && setIsMobileMenuOpen(false)}>
+          <div className="chat-area">
+            <div className="messages">
+              {messages.map((msg, idx) => (
+                msg.role === "ai" ? (
+                  <div
+                    key={idx}
+                    className="message-row ai-row"
+                    style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-start', marginBottom: '0.5em' }}
+                  >
+                    <span className="ai-avatar" style={{ marginRight: 12, marginTop: 2 }}>
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" fill="#232323" stroke="#4caf50" strokeWidth="2" />
+                        <rect x="7" y="9" width="10" height="6" rx="3" fill="#4caf50" />
+                        <circle cx="9" cy="12" r="1" fill="#232323" />
+                        <circle cx="15" cy="12" r="1" fill="#232323" />
+                        <rect x="11" y="5" width="2" height="3" rx="1" fill="#4caf50" />
+                      </svg>
+                    </span>
+                    <div className="message ai-message">
+                      <ReactMarkdown>{msg.text}</ReactMarkdown>
+                      {msg.resumeButton && (
+                        <a
+                          href="/ajithx17/ajith - resume.pdf"
+                          download
+                          className="resume-download-btn"
+                          style={{ display: 'inline-block', marginTop: 16 }}
+                        >
+                          Download Resume
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                ) : (
+                  <div
+                    key={idx}
+                    className="message-row user-row"
+                    style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-end', marginBottom: '0.5em', width: '100%' }}
+                  >
+                    <div className="message user-message">
+                      {msg.text}
+                    </div>
+                  </div>
+                )
+              ))}
+              {loading && streamedText && (
+                <div className="message-row ai-row" style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-start', marginBottom: '0.5em' }}>
                   <span className="ai-avatar" style={{ marginRight: 12, marginTop: 2 }}>
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <circle cx="12" cy="12" r="10" fill="#232323" stroke="#4caf50" strokeWidth="2" />
@@ -465,89 +535,52 @@ Always stay focused on Ajith's portfolio and professional background.`;
                     </svg>
                   </span>
                   <div className="message ai-message">
-                    <ReactMarkdown>{msg.text}</ReactMarkdown>
-                    {msg.resumeButton && (
-                      <a
-                        href="/ajith - resume.pdf"
-                        download
-                        className="resume-download-btn"
-                        style={{ display: 'inline-block', marginTop: 16 }}
-                      >
-                        Download Resume
-                      </a>
-                    )}
+                    <ReactMarkdown>{streamedText}</ReactMarkdown>
                   </div>
                 </div>
-              ) : (
-                <div
-                  key={idx}
-                  className="message-row user-row"
-                  style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-end', marginBottom: '0.5em', width: '100%' }}
-                >
-                  <div className="message user-message">
-                    {msg.text}
-                  </div>
+              )}
+              {loading && !streamedText && (
+                <div className="message-row ai-row" style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-start', marginBottom: '0.5em' }}>
+                  <span className="ai-avatar" style={{ marginRight: 12, marginTop: 2 }}>
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="12" cy="12" r="10" fill="#232323" stroke="#4caf50" strokeWidth="2" />
+                      <rect x="7" y="9" width="10" height="6" rx="3" fill="#4caf50" />
+                      <circle cx="9" cy="12" r="1" fill="#232323" />
+                      <circle cx="15" cy="12" r="1" fill="#232323" />
+                      <rect x="11" y="5" width="2" height="3" rx="1" fill="#4caf50" />
+                    </svg>
+                  </span>
+                  <div className="message ai-message">Thinking...</div>
                 </div>
-              )
-            ))}
-            {loading && streamedText && (
-              <div className="message-row ai-row" style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-start', marginBottom: '0.5em' }}>
-                <span className="ai-avatar" style={{ marginRight: 12, marginTop: 2 }}>
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="12" cy="12" r="10" fill="#232323" stroke="#4caf50" strokeWidth="2" />
-                    <rect x="7" y="9" width="10" height="6" rx="3" fill="#4caf50" />
-                    <circle cx="9" cy="12" r="1" fill="#232323" />
-                    <circle cx="15" cy="12" r="1" fill="#232323" />
-                    <rect x="11" y="5" width="2" height="3" rx="1" fill="#4caf50" />
-                  </svg>
-                </span>
-                <div className="message ai-message">
-                  <ReactMarkdown>{streamedText}</ReactMarkdown>
-                </div>
-              </div>
-            )}
-            {loading && !streamedText && (
-              <div className="message-row ai-row" style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-start', marginBottom: '0.5em' }}>
-                <span className="ai-avatar" style={{ marginRight: 12, marginTop: 2 }}>
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="12" cy="12" r="10" fill="#232323" stroke="#4caf50" strokeWidth="2" />
-                    <rect x="7" y="9" width="10" height="6" rx="3" fill="#4caf50" />
-                    <circle cx="9" cy="12" r="1" fill="#232323" />
-                    <circle cx="15" cy="12" r="1" fill="#232323" />
-                    <rect x="11" y="5" width="2" height="3" rx="1" fill="#4caf50" />
-                  </svg>
-                </span>
-                <div className="message ai-message">Thinking...</div>
-              </div>
-            )}
-            <div ref={messagesEndRef} />
-          </div>
-          <div className="input-bar">
-            <input
-              type="text"
-              placeholder={loading ? "Wait for response..." : "Type a message..."}
-              value={input}
-              onChange={e => setInput(e.target.value)}
-              onKeyDown={handleKeyDown}
-              disabled={loading}
-            />
-            <button title="Send" onClick={() => handleSend()} disabled={loading}>&#8593;</button>
-          </div>
-          <div className="quick-questions">
-            {quickQuestions.map((q, idx) => (
-              <button
-                key={idx}
-                className="quick-question-btn"
-                onClick={() => handleQuickQuestion(q.text)}
+              )}
+              <div ref={messagesEndRef} />
+            </div>
+            <div className="input-bar">
+              <input
+                type="text"
+                placeholder={loading ? "Wait for response..." : "Type a message..."}
+                value={input}
+                onChange={e => setInput(e.target.value)}
+                onKeyDown={handleKeyDown}
                 disabled={loading}
-              >
-                {q.icon}
-                {q.text}
-              </button>
-            ))}
+              />
+              <button title="Send" onClick={() => handleSend()} disabled={loading}>&#8593;</button>
+            </div>
+            <div className="quick-questions">
+              {quickQuestions.map((q, idx) => (
+                <button
+                  key={idx}
+                  className="quick-question-btn"
+                  onClick={() => handleQuickQuestion(q.text)}
+                  disabled={loading}
+                >
+                  {q.icon}
+                  {q.text}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
       </div>
       {showProfileModal && (
         <div className="modal-overlay" onClick={() => setShowProfileModal(false)}>
