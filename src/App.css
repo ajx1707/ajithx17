@@ -748,4 +748,71 @@ html, body, #root {
   .chat-area {
     padding-top: 12px;
   }
+
+  /* Adjust profile section spacing for mobile */
+  .profile-container {
+    margin-top: 12px;
+    margin-bottom: 16px;
+    gap: 16px;
+  }
+
+  .profile-glow {
+    width: 140px;
+    height: 140px;
+  }
+
+  .profile-img {
+    width: 120px;
+    height: 120px;
+  }
+
+  /* Reduce spacing in bio and other sections */
+  .bio-section {
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
+
+  .bio-text {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  /* Adjust section spacing */
+  .section-title {
+    margin-bottom: 8px;
+    padding-bottom: 2px;
+  }
+
+  /* Adjust social section */
+  .social-section {
+    position: relative;
+    bottom: auto;
+    width: 100%;
+    padding: 12px 0;
+    margin-top: 16px;
+  }
+
+  .social-links {
+    gap: 16px;
+    justify-content: center;
+  }
+
+  .social-links a {
+    padding: 8px;
+  }
+
+  /* Make left panel content more compact */
+  .left-panel {
+    padding: 16px 16px 24px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* Ensure proper spacing between sections */
+  .skills-section,
+  .education-section,
+  .experience-section {
+    margin-top: 16px;
+  }
 }
