@@ -432,8 +432,8 @@ Always stay focused on Ajith's portfolio and professional background.`;
             <div className="profile-glow">
               <img
                 className="profile-img"
-                src="/ajithx17/IMG_20250708_114543.jpg"
-                alt="Ajith Kumar"
+                src="/IMG_20250708_114543.jpg"
+                alt="Ajith"
                 style={{ cursor: 'pointer' }}
                 onClick={() => setShowProfileModal(true)}
               />
@@ -501,7 +501,7 @@ Always stay focused on Ajith's portfolio and professional background.`;
                       <ReactMarkdown>{msg.text}</ReactMarkdown>
                       {msg.resumeButton && (
                         <a
-                          href="/ajithx17/ajith - resume.pdf"
+                          href="/ajith - resume.pdf"
                           download
                           className="resume-download-btn"
                           style={{ display: 'inline-block', marginTop: 16 }}
