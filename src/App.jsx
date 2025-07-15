@@ -3,8 +3,7 @@ import ReactMarkdown from "react-markdown";
 import portfolioData from "./portfolioData.json";
 import "./App.css";
 
-const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
-const MODEL = "llama-3.3-70b-versatile";
+
 
 const optionsList = [
   "Summary", "Projects", "Skills", "Technical Skills", "Soft Skills", "Work Experience", "Education", "Certifications", "Contact"
@@ -248,16 +247,6 @@ function App() {
     // Use Llama-3 API for ALL questions with full portfolio context
     // This allows the AI to understand intent and provide contextual responses
     try {
-      const apiKey = import.meta.env.VITE_GROQ_API_KEY;
-      if (!apiKey) {
-        setMessages((prev) => [
-          ...prev,
-          { role: "ai", text: "[Error: No API key set. Please set VITE_GROQ_API_KEY in your environment.]" },
-        ]);
-        setLoading(false);
-        return;
-      }
-
       // Create context with portfolio data for the AI
       const portfolioContext = `You are Ajith's personal portfolio assistant. Here is Ajith's portfolio information:
 
@@ -322,14 +311,12 @@ Always stay focused on Ajith's portfolio and professional background.`;
         { role: "user", content: messageText }
       ];
 
-      const response = await fetch(GROQ_API_URL, {
+      const response = await fetch(`/.netlify/functions/chat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${apiKey}`,
         },
         body: JSON.stringify({
-          model: MODEL,
           messages: chatHistory,
         }),
       });
@@ -412,7 +399,7 @@ Always stay focused on Ajith's portfolio and professional background.`;
             <div className="profile-glow">
               <img
                 className="profile-img"
-                src="/IMG_20250708_114543.jpg"
+                src="/ajithx17/IMG_20250708_114543.jpg"
                 alt="Ajith Kumar"
                 style={{ cursor: 'pointer' }}
                 onClick={() => setShowProfileModal(true)}
@@ -481,7 +468,7 @@ Always stay focused on Ajith's portfolio and professional background.`;
                     <ReactMarkdown>{msg.text}</ReactMarkdown>
                     {msg.resumeButton && (
                       <a
-                        href="/ajith - resume.pdf"
+                        href="/ajithx17/ajith - resume.pdf"
                         download
                         className="resume-download-btn"
                         style={{ display: 'inline-block', marginTop: 16 }}
@@ -566,7 +553,7 @@ Always stay focused on Ajith's portfolio and professional background.`;
         <div className="modal-overlay" onClick={() => setShowProfileModal(false)}>
           <div className="modal-content" onClick={e => e.stopPropagation()}>
             <img
-              src="/IMG_20250708_114543.jpg"
+              src="/ajithx17/IMG_20250708_114543.jpg"
               alt="Ajith Kumar Large"
               className="modal-profile-img"
             />
